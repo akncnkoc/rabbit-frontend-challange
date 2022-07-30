@@ -1,5 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+type GenreType = {
+  id: number;
+  name: string;
+};
+type ProductionCompanyType = {
+  id: number;
+  logo_path?: string;
+  name: string;
+};
 export type MovieType = {
   id: number;
   poster_path?: string;
@@ -7,10 +16,7 @@ export type MovieType = {
   adult: boolean;
   overview?: string;
   title: string;
-  genres: Array<{
-    id: number;
-    name: string;
-  }>;
+  genres: Array<GenreType>;
   budget: number;
   popularity: number;
   release_date: string;
@@ -19,27 +25,25 @@ export type MovieType = {
   vote_count: number;
   revenue: number;
   runtime: number;
-  production_companies?: Array<{
-    id: number;
-    logo_path?: string;
-    name: string;
-  }>;
+  production_companies?: Array<ProductionCompanyType>;
+};
+type CastType = {
+  gender: number;
+  known_for_department: string;
+  name: string;
+  profile_path: string;
+  character: string;
+};
+type CrewType = {
+  gender: number;
+  known_for_department: string;
+  name: string;
+  profile_path: string;
+  character: string;
 };
 type MovieCreditsType = {
-  cast: Array<{
-    gender: number;
-    known_for_department: string;
-    name: string;
-    profile_path: string;
-    character: string;
-  }>;
-  crew: Array<{
-    gender: number;
-    known_for_department: string;
-    name: string;
-    profile_path: string;
-    character: string;
-  }>;
+  cast: Array<CastType>;
+  crew: Array<CrewType>;
 };
 const initialState: {
   movie: MovieType | null;

@@ -1,6 +1,6 @@
 import "react-multi-carousel/lib/styles.css";
-import { FC,  useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import FullPageLoader from "../components/FullPageLoader";
 import { fetchMovie, fetchMovieCredits } from "../features/movies/movieSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -13,6 +13,7 @@ const Movie: FC = () => {
   const movieSelector = useAppSelector((selector) => selector.movieSlice);
   const languageSelector = useAppSelector((selector) => selector.languageSlice);
   const [creditSection, setCreditSecton] = useState<boolean>(false);
+  const navigate = useNavigate();
   useEffect(() => {
     if (params.id) {
       dispatch(fetchMovie({ id: params.id, lang: languageSelector.language }));
@@ -113,7 +114,8 @@ const Movie: FC = () => {
     );
   };
 
-  if (movieSelector.loading && !movieSelector.error) return <FullPageLoader />;
+  if (movieSelector.loading) return <FullPageLoader />;
+  else if (movieSelector.error) navigate("/");
 
   return (
     <div className="grid grid-cols-3 flex-1">
