@@ -113,9 +113,8 @@ const Movie: FC = () => {
       </div>
     );
   };
-
   if (movieSelector.loading) return <FullPageLoader />;
-  else if (movieSelector.error) navigate("/");
+  if (movieSelector.error) return navigate("/");
 
   return (
     <div className="grid grid-cols-3 flex-1">
@@ -218,7 +217,7 @@ const CreditSection: FC<{}> = () => {
       <h3 className="font-bold text-3xl text-center mb-4 underline underline-offset-1">
         Cast
       </h3>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-2 w-full">
         {movieSelector.movieCredits?.cast &&
           movieSelector.movieCredits.cast.slice(0, 20).map((cast, index) => (
             <div key={index} className="flex mr-4">
