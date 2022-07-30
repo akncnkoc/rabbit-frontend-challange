@@ -6,14 +6,12 @@ import { CarouselCustomButtonGroup } from "./CarouselCustomButton";
 import { PopularMoviesType } from "../features/movies/popularMoviesSlice";
 import Loader from "./SkeletonLoader";
 import { useNavigate } from "react-router-dom";
-type HomeMovieSectionProps = {
+type MovieSectionProps = {
   movies: TopRatedMoviesType[] | PopularMoviesType[];
   loading: boolean;
 };
 
-const HomeMovieSection: FC<HomeMovieSectionProps & { title: string }> = (
-  props
-) => {
+const MovieSection: FC<MovieSectionProps & { title: string }> = (props) => {
   const responsiveOpts = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -71,4 +69,4 @@ const HomeMovieSection: FC<HomeMovieSectionProps & { title: string }> = (
   );
 };
 
-export default HomeMovieSection;
+export default MovieSection;
