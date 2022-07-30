@@ -1,5 +1,13 @@
 ## Rabbit Front-End Challange
 
+### Used Libs
+ - Vite
+ - Redux - Redux Toolkit
+ - Tailwind
+ - Headless UI
+ - HeroIcons - React Icons
+ - React Router DOM
+
 ### Instructions
 
 ```sh
