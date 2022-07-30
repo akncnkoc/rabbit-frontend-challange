@@ -1,5 +1,5 @@
 import "react-multi-carousel/lib/styles.css";
-import { FC, Fragment, useEffect, useRef, useState } from "react";
+import { FC,  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FullPageLoader from "../components/FullPageLoader";
 import { fetchMovie, fetchMovieCredits } from "../features/movies/movieSlice";
