@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body,
+  html,
+  #root {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    @apply w-full h-full;
+  }
+  .fill-in-page {
+    height: calc(100% - 56px);
+  }
+}
