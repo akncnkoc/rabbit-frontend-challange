@@ -67,13 +67,14 @@ export const fetchMovie = createAsyncThunk(
         import.meta.env.VITE_API_V3_KEY +
         `&language=${lang}`
     );
-    
-    if(response.status != 200) return thunkAPI.rejectWithValue("Couldnt fetch movie");
+
+    if (response.status != 200)
+      return thunkAPI.rejectWithValue("Couldnt fetch movie");
     return (await response.json()) || ({} as MovieType);
   }
 );
 export const fetchMovieCredits = createAsyncThunk(
-  "movies/fetch-credits",
+  "movies/fetch-movie-credits",
   async (params: any, thunkAPI) => {
     const { id, lang } = params;
     const response = await fetch(
@@ -82,7 +83,8 @@ export const fetchMovieCredits = createAsyncThunk(
         import.meta.env.VITE_API_V3_KEY +
         `&language=${lang}`
     );
-    if(response.status !== 200) return thunkAPI.rejectWithValue("Couldnt fetch movie");
+    if (response.status !== 200)
+      return thunkAPI.rejectWithValue("Couldnt fetch movie credits");
     return (await response.json()) || ({} as MovieType);
   }
 );
@@ -104,7 +106,7 @@ export const MovieSlice = createSlice({
       state.loading = false;
       state.error = "Could'nt fetch movie";
     });
-  
+
     builder.addCase(fetchMovieCredits.pending, (state, action) => {
       state.loading = true;
       state.error = "";
