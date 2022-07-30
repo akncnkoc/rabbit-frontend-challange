@@ -113,8 +113,80 @@ const Movie: FC = () => {
       </div>
     );
   };
+
+  const CreditSection: FC<{}> = () => {
+    const movieSelector = useAppSelector((selector) => selector.movieSlice);
+    useEffect(() => {}, []);
+    return (
+      <div className="col-span-2 flex items-center flex-col p-16 overflow-y-scroll bg-gray-100">
+        <h3 className="font-bold text-3xl text-center mb-4 underline underline-offset-1">
+          Cast
+        </h3>
+        <div className="grid grid-cols-4 gap-2 w-full">
+          {movieSelector.movieCredits?.cast &&
+            movieSelector.movieCredits.cast.slice(0, 20).map((cast, index) => (
+              <div key={index} className="flex mr-4">
+                <div className="w-16 mr-4">
+                  {(cast.profile_path && (
+                    <img
+                      src={
+                        import.meta.env.VITE_API_IMAGE_URL + cast.profile_path
+                      }
+                      alt={cast.name}
+                      className="h-16 w-16 object-cover rounded-full"
+                    />
+                  )) || (
+                    <img
+                      src={import.meta.env.VITE_NO_IMAGE}
+                      alt={cast.name}
+                      className="h-16 w-16 object-cover rounded-full"
+                    />
+                  )}
+                </div>
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">{cast.name}</h3>
+                  <span className="text-sm">({cast.character})</span>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        <h3 className="font-bold text-3xl text-center mb-4 mt-16 underline underline-offset-1">
+          Crew
+        </h3>
+        <div className="grid grid-cols-4 gap-2 w-full">
+          {movieSelector.movieCredits?.crew &&
+            movieSelector.movieCredits.crew.slice(0, 20).map((crew, index) => (
+              <div key={index} className="flex mr-4">
+                <div className="w-16 mr-4">
+                  {(crew.profile_path && (
+                    <img
+                      src={
+                        import.meta.env.VITE_API_IMAGE_URL + crew.profile_path
+                      }
+                      alt={crew.name}
+                      className="h-16 w-16 object-cover rounded-full"
+                    />
+                  )) || (
+                    <img
+                      src={import.meta.env.VITE_NO_IMAGE}
+                      alt={crew.name}
+                      className="h-16 w-16 object-cover rounded-full"
+                    />
+                  )}
+                </div>
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">{crew.name}</h3>
+                  <span className="text-sm">({crew.known_for_department})</span>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  };
   if (movieSelector.loading) return <FullPageLoader />;
-  if (movieSelector.error) return navigate("/");
+  if (movieSelector.error) return <Navigate replace to="/" />;
 
   return (
     <div className="grid grid-cols-3 flex-1">
@@ -209,71 +281,4 @@ const Movie: FC = () => {
   );
 };
 
-const CreditSection: FC<{}> = () => {
-  const movieSelector = useAppSelector((selector) => selector.movieSlice);
-  useEffect(() => {}, []);
-  return (
-    <div className="col-span-2 flex items-center flex-col p-16 overflow-y-scroll bg-gray-100">
-      <h3 className="font-bold text-3xl text-center mb-4 underline underline-offset-1">
-        Cast
-      </h3>
-      <div className="grid grid-cols-4 gap-2 w-full">
-        {movieSelector.movieCredits?.cast &&
-          movieSelector.movieCredits.cast.slice(0, 20).map((cast, index) => (
-            <div key={index} className="flex mr-4">
-              <div className="w-16 mr-4">
-                {(cast.profile_path && (
-                  <img
-                    src={import.meta.env.VITE_API_IMAGE_URL + cast.profile_path}
-                    alt={cast.name}
-                    className="h-16 w-16 object-cover rounded-full"
-                  />
-                )) || (
-                  <img
-                    src={import.meta.env.VITE_NO_IMAGE}
-                    alt={cast.name}
-                    className="h-16 w-16 object-cover rounded-full"
-                  />
-                )}
-              </div>
-              <div className="flex flex-col space-y-2">
-                <h3 className="text-lg font-medium">{cast.name}</h3>
-                <span className="text-sm">({cast.character})</span>
-              </div>
-            </div>
-          ))}
-      </div>
-
-      <h3 className="font-bold text-3xl text-center mb-4 mt-16 underline underline-offset-1">
-        Crew
-      </h3>
-      <div className="grid grid-cols-4 gap-2 w-full">
-        {movieSelector.movieCredits?.crew &&
-          movieSelector.movieCredits.crew.slice(0, 20).map((crew, index) => (
-            <div key={index} className="flex mr-4">
-              <div className="w-16 mr-4">
-                {(crew.profile_path && (
-                  <img
-                    src={import.meta.env.VITE_API_IMAGE_URL + crew.profile_path}
-                    alt={crew.name}
-                    className="h-16 w-16 object-cover rounded-full"
-                  />
-                )) || (
-                  <img
-                    src={import.meta.env.VITE_NO_IMAGE}
-                    alt={crew.name}
-                    className="h-16 w-16 object-cover rounded-full"
-                  />
-                )}
-              </div>
-              <div className="flex flex-col space-y-2">
-                <h3 className="text-lg font-medium">{crew.name}</h3>
-                <span className="text-sm">({crew.known_for_department})</span>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
-  );
-};
 export default Movie;
