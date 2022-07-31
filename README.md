@@ -8,6 +8,12 @@
  - HeroIcons - React Icons
  - React Router DOM
 
+### Features
+ - Languages (TR - EN)
+ - Top Rated - Trend Movies
+ - Movie -> Overview,Credits, Voting, Cast&Crew, Productions
+ - About
+
 ### Instructions
 
 ```sh
