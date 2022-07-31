@@ -6,6 +6,8 @@ import { CarouselCustomButtonGroup } from "./CarouselCustomButton";
 import { PopularMoviesType } from "../features/movies/popularMoviesSlice";
 import Loader from "./SkeletonLoader";
 import { useNavigate } from "react-router-dom";
+import Stars from "./Stars";
+import { truncateString } from "../utils";
 type MovieSectionProps = {
   movies: TopRatedMoviesType[] | PopularMoviesType[];
   loading: boolean;
@@ -34,11 +36,33 @@ const MovieSection: FC<MovieSectionProps & { title: string }> = (props) => {
         className="h-full flex items-center justify-center cursor-pointer"
         onClick={() => navigate("/movie/" + props.id)}
       >
-        <img
-          src={import.meta.env.VITE_API_IMAGE_URL + "/" + props.poster_path}
-          alt={props.title}
-          className="h-[800px] rounded-xl"
-        />
+        <div className="relative h-full  rounded-xl overflow-hidden">
+          <div className="w-full h-full top-0 left-0 absolute backdrop-blur-[2px]">
+            <div className="text-white flex justify-end m-2">
+              <Stars
+                vote_average={props.vote_average}
+                vote_count={props.vote_count}
+                horizontal
+                size="w-8 h-8"
+              />
+            </div>
+            <div className="flex items-center text-white justify-center h-full absolute top-1/2 transform -translate-y-1/2 w-full">
+              <div className="w-full h-12 text-xl text-white flex items-center justify-center bg-black/50">
+                {props.title}
+              </div>
+            </div>
+            <div className="flex text-white h-full absolute bottom-0 items-end w-full">
+              <div className="w-full text-xl text-white bg-black/50 p-4">
+                <p className="text-sm">{truncateString(props.overview || "", 150)}</p>
+              </div>
+            </div>
+          </div>
+          <img
+            src={import.meta.env.VITE_API_IMAGE_URL + "/" + props.poster_path}
+            alt={props.title}
+            className="h-[800px] rounded-xl"
+          />
+        </div>
       </div>
     );
   };

@@ -12,3 +12,6 @@ export const convertMinsToHrsMins = (minutes: number) => {
   m = m < 10 ? "0" + m : m;
   return h + ":" + m;
 };
+
+export const truncateString = (string: string, maxLength: number = 50) =>
+  string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;

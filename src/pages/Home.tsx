@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import MovieSection from "../components/HomeMovieSection";
+import MovieSection from "../components/MovieSection";
 import { fetchTopRatedMovies } from "../features/movies/topRatedMovieSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchPopularMovies } from "../features/movies/popularMoviesSlice";

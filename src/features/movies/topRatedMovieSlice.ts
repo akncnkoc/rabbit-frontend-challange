@@ -4,7 +4,9 @@ export type TopRatedMoviesType = {
   poster_path?: string
   adult: boolean
   overview?: string
-  title: string
+  title: string,
+  vote_average: number;
+  vote_count: number;
 }
 
 const initialState: { movies: TopRatedMoviesType[], loading: boolean, error: string } = {
